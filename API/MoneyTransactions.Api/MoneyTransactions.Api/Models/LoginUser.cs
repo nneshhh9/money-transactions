@@ -1,3 +1,4 @@
+
 namespace MoneyTransactions.Api.Models;
 
 public class LoginUser
