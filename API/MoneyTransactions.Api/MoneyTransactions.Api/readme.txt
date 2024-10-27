@@ -1,5 +1,9 @@
 #обновить/создать бд
-dotnet ef database update -c MoneyTransactions.Data.ApplicationDbContext --project MoneyTransactions
+dotnet ef database update -c MoneyTransactions.Api.Data.ApplicationDbContext --project MoneyTransactions.Api
 
 #добавить миграцию
-dotnet ef migration add CreateCategoryTable -c MoneyTransactions.Data.ApplicationDbContext --project MoneyTransactions
+dotnet ef migrations add CreateCategoryTable -c MoneyTransactions.Api.Data.ApplicationDbContext --project MoneyTransactions.Api
+dotnet ef migration add CreateCategoryTable
+
+#удалить миграцию
+dotnet ef migrations remove

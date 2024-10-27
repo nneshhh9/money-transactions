@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "avvF39x7EKkXHA5sLKGxj/Xzsxdn3qmJxUi1fOBrNkw=",
+  "Source": "MoneyTransactions.Api",
+  "BasePath": "_content/MoneyTransactions.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

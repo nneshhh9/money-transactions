@@ -1,40 +1,44 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MoneyTransactions.Api.Data;
+using MoneyTransactions.Api.Definitions;
+using MoneyTransactions.Api.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("SecurityDb"));
+    // options.UseOpenIddict();
 });
 
-// Add services to the container.
-// builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AspNetCoreIdentityDbContext>();
-// builder.Services.AddScoped<AuthenticationService>();
-
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerDefinition();
+builder.Services.AddOpenIddictDefinition();
+
+builder.Services.AddCors();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerDefinition();
 }
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapDefaultControllerRoute();
 
 app.Run();
